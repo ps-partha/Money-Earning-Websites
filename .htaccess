@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# Condition to check if the request is not for a file or directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Specific routes for log-in, payout-rates, and sign-up
+RewriteRule ^log-in$ log-in.php [L]
+RewriteRule ^payout-rates$ payout-rates.php [L]
+RewriteRule ^sign-up$ sign-up.php [L]
+
+# General rule to handle alphanumeric short codes (e.g., /j9ItiJ)
+RewriteRule ^([a-zA-Z0-9]+)$ url-view.php?code=$1 [L]
+
+# Rewrite URLs without extensions to their corresponding PHP files
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
